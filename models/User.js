@@ -17,10 +17,18 @@ const userSchema = new Schema(
         "Please provide a valid email address",
       ],
     },
-    thoughts: [thoughtSchema],
-    friends: {
-      //Needs to self-reference
-    },
+    thoughts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Thought",
+      },
+    ],
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
   {
     toJSON: {
@@ -28,8 +36,10 @@ const userSchema = new Schema(
     },
     id: false,
   }
-  //Also needs a virtual called friendCount that retrieves the length of the user's friends array field on query
 );
+userSchema.virtual("friendCount").get(function () {
+  return this.friends.length;
+});
 
 const User = model("user", userSchema);
 
