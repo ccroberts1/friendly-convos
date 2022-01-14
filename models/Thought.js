@@ -1,6 +1,27 @@
 const { Schema, model } = require("mongoose");
 const thoughtSchema = require("./Thought");
 
+const reactionSchema = new Schema({
+  reactionId: {
+    type: Schema.Types.ObjectId,
+    default: new Schema.Types.ObjectId(),
+  },
+  reactionBody: {
+    type: String,
+    required: true,
+    maxLength: 280,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+    get: formatTime,
+  },
+});
+
 const thoughtSchema = new Schema(
   {
     thoughtText: {
@@ -11,16 +32,14 @@ const thoughtSchema = new Schema(
     },
     createdAt: {
       type: Date,
-      default: Date.now,
+      default: Date.now(),
       get: formatTime,
     },
     username: {
       type: String,
       required: true,
     },
-    reactions: {
-      //array of nested docs created with reactionschema
-    },
+    reactions: reactionSchema,
   },
   {
     toJSON: {
@@ -36,10 +55,11 @@ thoughtSchema.virtual("reactionCount").get(function () {
 function formatTime(date) {
   let day = date.getDate(date);
   let month = date.getMonth(date) + 1;
+  let year = date.getYear(date);
   let hours = date.getHours(date) + 1;
   let minutes = date.getMinutes(date);
 
-  return `${month}/${day} at ${hours}:${minutes}`;
+  return `${month}/${day}/${year} at ${hours}:${minutes}`;
 }
 const Thought = model("thought", thoughtSchema);
 
