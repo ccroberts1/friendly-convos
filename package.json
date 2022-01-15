@@ -1,0 +1,27 @@
+{
+  "name": "friendly-convos",
+  "version": "1.0.0",
+  "description": "social media backend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index",
+    "seed": "node utils/seed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccroberts1/friendly-convos.git"
+  },
+  "author": "Caitlin Roberts",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ccroberts1/friendly-convos/issues"
+  },
+  "homepage": "https://github.com/ccroberts1/friendly-convos#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mongoose": "^6.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
