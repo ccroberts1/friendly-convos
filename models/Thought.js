@@ -39,17 +39,17 @@ const thoughtSchema = new Schema(
       required: true,
     },
     reactions: reactionSchema,
-  },
-  {
-    toJSON: {
-      virtuals: true,
-    },
-    id: false,
   }
+  // {
+  //   toJSON: {
+  //     virtuals: true,
+  //   },
+  //   id: false,
+  // }
 );
-thoughtSchema.virtual("reactionCount").get(function () {
-  return this.reactions.length;
-});
+// thoughtSchema.virtual("reactionCount").get(function () {
+//   return this.reactions.length;
+// });
 
 function formatTime(date) {
   let day = date.getDate(date);
