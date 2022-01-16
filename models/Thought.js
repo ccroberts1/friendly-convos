@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const thoughtSchema = require("./Thought");
 
 const reactionSchema = new Schema({
   reactionId: {
@@ -61,6 +60,6 @@ function formatTime(date) {
 
   return `${month}/${day}/${year} at ${hours}:${minutes}`;
 }
-const Thought = model("thought", thoughtSchema);
+const Thought = model("Thought", thoughtSchema);
 
 module.exports = Thought;
