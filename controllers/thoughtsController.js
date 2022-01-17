@@ -50,8 +50,8 @@ module.exports = {
   //Remove a Thought
   deleteThought(req, res) {
     Thought.findOneAndDelete({ _id: req.params.thoughtId })
-      .then((course) =>
-        !course
+      .then((thought) =>
+        !thought
           ? res.status(404).json({ message: "No thought with that ID" })
           : Thought.deleteOne({ _id: req.params.thoughtId })
       )
@@ -62,5 +62,38 @@ module.exports = {
       });
   },
   //Create a reaction
+  createReaction(req, res) {
+    Thought.findById(req.params.thoughtId)
+      .then((result) => {
+        if (!result) {
+          res.status(404).json({ message: "No thought with that ID" });
+        } else {
+          result.reactions.push(req.body);
+          res.json(result);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json(err);
+      });
+  },
   //Remove a reaction
+  deleteReaction(req, res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $pull: { reactions: req.body.reactionId } },
+      { runValidators: true, new: true }
+    )
+      .then((result) => {
+        if (!result) {
+          res.status(404).json({ message: "No thought with that ID" });
+        } else {
+          res.json(result);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json(err);
+      });
+  },
 };

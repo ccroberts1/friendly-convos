@@ -1,9 +1,9 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 
 const reactionSchema = new Schema({
   reactionId: {
-    type: Schema.Types.ObjectId,
-    default: new Schema.Types.ObjectId(),
+    type: Types.ObjectId,
+    default: new Types.ObjectId(),
   },
   reactionBody: {
     type: String,
@@ -38,27 +38,22 @@ const thoughtSchema = new Schema(
       type: String,
       required: true,
     },
-    reactions: reactionSchema,
+    reactions: [reactionSchema],
+  },
+  {
+    toJSON: {
+      virtuals: true,
+      getters: true,
+    },
+    id: false,
   }
-  // {
-  //   toJSON: {
-  //     virtuals: true,
-  //   },
-  //   id: false,
-  // }
 );
-// thoughtSchema.virtual("reactionCount").get(function () {
-//   return this.reactions.length;
-// });
+thoughtSchema.virtual("reactionCount").get(function () {
+  return this.reactions.length;
+});
 
 function formatTime(date) {
-  let day = date.getDate(date);
-  let month = date.getMonth(date) + 1;
-  let year = date.getYear(date);
-  let hours = date.getHours(date) + 1;
-  let minutes = date.getMinutes(date);
-
-  return `${month}/${day}/${year} at ${hours}:${minutes}`;
+  return date.toString();
 }
 const Thought = model("Thought", thoughtSchema);
 
