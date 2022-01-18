@@ -8,7 +8,7 @@ The goal for this project was to create the back-end for a social media platform
 
 If you'd like to see a demonstation, please see the link below
 
-[Quick demo of app on YouTube]()
+[Quick demo of app on YouTube](https://youtu.be/NEdW8aUTYfg)
 
 ## Table of Contents
 
