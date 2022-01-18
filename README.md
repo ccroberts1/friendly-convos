@@ -16,7 +16,6 @@ If you'd like to see a demonstation, please see the link below
 - [Usage](#usage)
 - [License](#license)
 - [How to Contribute](#contributing)
-- [Tests](#tests)
 
 ## Installation
 
@@ -49,14 +48,6 @@ Once the server is up and running, you should be able to test any routes in Inso
 ## Contributing
 
 Please feel free to contribute as you have time and energy
-
-## Tests
-
-To run tests, run the following command:
-
-```
-
-```
 
 ## Questions
 
